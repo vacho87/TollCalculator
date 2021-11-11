@@ -13,7 +13,7 @@ namespace TollCalc
             Taxi => 3.50m,
             Bus => 5.00m,
             DeliveryTruck => 10.00m,
-            { } => throw new ArgumentException(message: "Not a known vehicle type", paramName: nameof(vehicle)),
+            { } => throw new ArgumentException("Unknown type of vehicle.", nameof(vehicle)),
             null => throw new ArgumentNullException(nameof(vehicle))
         };
     }
