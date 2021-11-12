@@ -20,10 +20,20 @@ namespace TollCalc.Tests
         {
             get
             {
-                yield return new TestCaseData(new Car(), 2m);
-                yield return new TestCaseData(new Bus(), 5m);
-                yield return new TestCaseData(new Taxi(), 3.5m);
-                yield return new TestCaseData(new DeliveryTruck(), 10m);
+                yield return new TestCaseData(new Car { Passengers = 0 }, 2.5m);
+                yield return new TestCaseData(new Car { Passengers = 1 }, 2m);
+                yield return new TestCaseData(new Car { Passengers = 2 }, 1.5m);
+                yield return new TestCaseData(new Car { Passengers = 3 }, 1m);
+                yield return new TestCaseData(new Taxi { Fares = 0 }, 4.5m);
+                yield return new TestCaseData(new Taxi { Fares = 1 }, 3.5m);
+                yield return new TestCaseData(new Taxi { Fares = 2 }, 3m);
+                yield return new TestCaseData(new Taxi { Fares = 4 }, 2.5m);
+                yield return new TestCaseData(new Bus { Capacity = 20, Riders = 3 }, 7m);
+                yield return new TestCaseData(new Bus { Capacity = 20, Riders = 10 }, 5m);
+                yield return new TestCaseData(new Bus { Capacity = 20, Riders = 19 }, 4m);                
+                yield return new TestCaseData(new DeliveryTruck { GrossWeightClass = 2000}, 8m);
+                yield return new TestCaseData(new DeliveryTruck { GrossWeightClass = 4000 }, 10m);
+                yield return new TestCaseData(new DeliveryTruck { GrossWeightClass = 6000 }, 15m);
             }
         }
 
