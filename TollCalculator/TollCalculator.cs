@@ -2,6 +2,7 @@
 using ConsumerVehicleRegistration;
 using LiveryRegistration;
 using System.Diagnostics.CodeAnalysis;
+using TollCalc.CustomVehicleTypes;
 
 namespace TollCalc
 {
@@ -21,28 +22,15 @@ namespace TollCalc
             {
                 throw new ArgumentNullException(nameof(vehicle));
             }
-           
-            if (vehicle is Car car)
-            {
-                return car.CalcToll();
-            }
 
-            if (vehicle is Taxi taxi)
+            return vehicle switch
             {
-                return taxi.CalcToll();
-            }
-
-            if (vehicle is Bus bus)
-            {
-                return bus.CalcToll();
-            }
-
-            if (vehicle is DeliveryTruck truck)
-            {
-                return truck.CalcToll();
-            }
-
-            throw new ArgumentException("Unknown type of vehicle.", nameof(vehicle));
+                Car car => new CustomCar(car).CalcToll(),
+                Taxi taxi => new CustomTaxi(taxi).CalcToll(),
+                Bus bus => new CustomBus(bus).CalcToll(),
+                DeliveryTruck truck => new CustomTruck(truck).CalcToll(),
+                _ => throw new ArgumentException("Unknown type of vehicle.", nameof(vehicle))
+            };
         }
 
         /// <summary>
